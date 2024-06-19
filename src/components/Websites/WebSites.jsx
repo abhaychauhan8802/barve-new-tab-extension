@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { Plus } from "lucide-react";
 import { Button } from "../ui/button";
+import AddWebSite from "./AddWebSite";
 
 const getFromLocalStorage = () => {
   let storedData = localStorage.getItem("siteData");
@@ -74,31 +74,27 @@ const WebSites = () => {
           </div>
         ))}
 
-        <div
-          className="flex justify-center items-center"
-          style={
-            isDesktop
-              ? {
-                  width: (0.66 * currentWidth - 12 * 9) / 9,
-                }
-              : isTablet
-              ? { width: (0.66 * currentWidth - 12 * 6) / 6 }
-              : { width: (0.66 * currentWidth - 12 * 4) / 4 }
-          }
-        >
-          <Button
-            variant="ghost"
-            onClick={() => console.log("Click")}
-            className="overflow-hidden hover:border-[1px] rounded-xl w-24 h-24 flex flex-col justify-center items-center px-2 md:px-4"
+        {webSitesData.length < 9 ? (
+          <div
+            className="flex justify-center items-center"
+            style={
+              isDesktop
+                ? {
+                    width: (0.66 * currentWidth - 12 * 9) / 9,
+                  }
+                : isTablet
+                ? { width: (0.66 * currentWidth - 12 * 6) / 6 }
+                : { width: (0.66 * currentWidth - 12 * 4) / 4 }
+            }
           >
-            <div className="bg-white border-[1px] p-[2px] rounded-xl">
-              <div className="w-10 h-10 text-2xl flex justify-center items-center">
-                {<Plus className="dark:text-background" />}
-              </div>
-            </div>
-            <p className="pt-2 text-xs px-2 whitespace-nowrap">Add site</p>
-          </Button>
-        </div>
+            <AddWebSite
+              webSitesData={webSitesData}
+              setWebSitesData={setWebSitesData}
+            />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
