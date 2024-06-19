@@ -1,10 +1,9 @@
 import React from "react";
 import ModeToggle from "./ModeToggle";
-import { Grip } from "lucide-react";
-import { Settings } from "lucide-react";
+import { Grip, Pencil, Settings, Check } from "lucide-react";
 import { Button } from "../ui/button";
 
-const Header = () => {
+const Header = ({ isEdit, setIsEdit }) => {
   return (
     <>
       <div className="flex p-4 justify-between items-center">
@@ -14,10 +13,18 @@ const Header = () => {
           </Button>
         </div>
         <div className="flex gap-2 items-center">
-          <ModeToggle />
-          <Button variant="ghost" size="icon">
-            <Settings className="h-[1.2rem] w-[1.2rem]" />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsEdit(!isEdit)}
+          >
+            {isEdit ? (
+              <Check className="h-[1.2rem] w-[1.2rem]" />
+            ) : (
+              <Pencil className="h-[1.2rem] w-[1.2rem]" />
+            )}
           </Button>
+          <ModeToggle />
         </div>
       </div>
     </>
