@@ -11,11 +11,11 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Plus } from "lucide-react";
+import { Pencil } from "lucide-react";
 
-const AddSiteShortcut = ({ webSitesData, setWebSitesData }) => {
-  const [siteName, setSiteName] = useState("");
-  const [siteUrl, setSiteUrl] = useState("");
+const EditWebsite = ({ webSitesData, setWebSitesData, website, idx }) => {
+  const [siteName, setSiteName] = useState(website.name);
+  const [siteUrl, setSiteUrl] = useState(website.url);
   const [open, setOpen] = useState(false);
 
   const handleSubmit = (e) => {
@@ -26,13 +26,19 @@ const AddSiteShortcut = ({ webSitesData, setWebSitesData }) => {
         /^https?:\/\/(www\.)?/,
         ""
       );
-      const newSite = {
-        name: siteName,
-        url: siteUrlWithoutProtocol,
-        img: `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${siteUrlWithoutProtocol}/&size=64`,
+
+      const updateItems = () => {
+        const copy = [...webSitesData];
+        copy.splice(idx, 1, {
+          name: siteName,
+          url: siteUrlWithoutProtocol,
+          img: `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${siteUrlWithoutProtocol}/&size=64`,
+        });
+        setWebSitesData(copy);
       };
 
-      setWebSitesData([...webSitesData, newSite]);
+      updateItems();
+
       setSiteName("");
       setSiteUrl("");
       setOpen(false);
@@ -44,16 +50,10 @@ const AddSiteShortcut = ({ webSitesData, setWebSitesData }) => {
       <DialogTrigger asChild>
         <Button
           variant="ghost"
-          className="overflow-hidden hover:border-[1px] rounded-xl w-24 h-24 flex flex-col justify-center items-center px-2 md:px-4"
+          className="w-full justify-start font-normal px-2"
         >
-          <div className="bg-white border-[1px] p-[2px] rounded-xl">
-            <div className="w-10 h-10 text-2xl flex justify-center items-center">
-              {<Plus className="dark:text-background" />}
-            </div>
-          </div>
-          <p className="pt-2 text-xs px-2 whitespace-nowrap select-none">
-            Add site
-          </p>
+          <Pencil className="w-[0.9rem] h-[0.9rem] mr-3" />
+          Edit
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[300px]">
@@ -62,8 +62,10 @@ const AddSiteShortcut = ({ webSitesData, setWebSitesData }) => {
           onSubmit={handleSubmit}
         >
           <DialogHeader>
-            <DialogTitle>Add Website</DialogTitle>
-            <DialogDescription>Add a new website shortcut</DialogDescription>
+            <DialogTitle>Edit Website</DialogTitle>
+            <DialogDescription>
+              Edit your website name and url
+            </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col gap-4 py-4">
             <div className="flex flex-col items-start gap-4">
@@ -86,7 +88,7 @@ const AddSiteShortcut = ({ webSitesData, setWebSitesData }) => {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit">Add</Button>
+            <Button type="submit">Save</Button>
           </DialogFooter>
         </form>
       </DialogContent>
@@ -94,4 +96,4 @@ const AddSiteShortcut = ({ webSitesData, setWebSitesData }) => {
   );
 };
 
-export default AddSiteShortcut;
+export default EditWebsite;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Button } from "../ui/button";
 import WebSiteOptions from "./WebSiteOptions";
-import AddSiteShortcut from "./AddSiteShortcut";
+import AddWebsite from "./AddWebsite";
 
 const getFromLocalStorage = () => {
   let storedData = localStorage.getItem("website-data");
@@ -70,11 +70,13 @@ const WebSites = ({ isEdit }) => {
             )}
 
             <Button
-              variant="ghost"
+              variant={isEdit ? "disable" : "ghost"}
               onClick={() => {
-                window.location.href = `https://${website.url}`;
+                if (!isEdit) {
+                  window.location.href = `https://${website.url}`;
+                }
               }}
-              className="overflow-hidden hover:border-[1px] rounded-xl w-24 h-24 flex flex-col justify-center items-center px-2 md:px-4"
+              className="overflow-hidden rounded-xl w-24 h-24 flex flex-col justify-center items-center px-2 md:px-4"
             >
               <div className="bg-white border-[1px] p-[2px] rounded-xl">
                 <div className="w-10 h-10 text-2xl flex justify-center items-center">
@@ -107,7 +109,7 @@ const WebSites = ({ isEdit }) => {
                 : { width: (0.66 * currentWidth - 12 * 4) / 4 }
             }
           >
-            <AddSiteShortcut
+            <AddWebsite
               webSitesData={webSitesData}
               setWebSitesData={setWebSitesData}
             />

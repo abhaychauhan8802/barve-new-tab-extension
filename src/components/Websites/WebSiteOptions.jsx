@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Pencil, Trash } from "lucide-react";
-import EditSite from "./EditSite";
+import EditWebsite from "./EditWebsite";
 
 const WebSiteOptions = ({
   website,
@@ -16,7 +16,7 @@ const WebSiteOptions = ({
   setWebSitesData,
 }) => {
   return (
-    <div className="absolute top-0 right-0">
+    <div className="absolute top-0 right-0 z-50">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="icon">
@@ -24,7 +24,7 @@ const WebSiteOptions = ({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <EditSite
+          <EditWebsite
             website={website}
             idx={idx}
             webSitesData={webSitesData}
