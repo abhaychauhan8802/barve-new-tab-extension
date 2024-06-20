@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 const initialState = {
-  theme: "light",
+  theme: "system",
   setTheme: () => null,
 };
 
@@ -9,7 +9,7 @@ const ThemeProviderContext = createContext(initialState);
 
 const ThemeProvider = ({
   children,
-  defaultTheme = "light",
+  defaultTheme = "system",
   storageKey = "current-ui-theme",
   ...props
 }) => {
@@ -19,7 +19,18 @@ const ThemeProvider = ({
 
   useEffect(() => {
     const root = window.document.documentElement;
+
     root.classList.remove("light", "dark");
+
+    if (theme === "system") {
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+        .matches
+        ? "dark"
+        : "light";
+      root.classList.add(systemTheme);
+      return;
+    }
+
     root.classList.add(theme);
   }, [theme]);
 
