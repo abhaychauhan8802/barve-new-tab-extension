@@ -51,14 +51,12 @@ const AddWebsite = ({ webSitesData, setWebSitesData }) => {
               {<Plus className="dark:text-background" />}
             </div>
           </div>
-          <p className="pt-2 text-xs px-2 whitespace-nowrap select-none">
-            Add site
-          </p>
+          <p className="pt-2 text-xs px-2 whitespace-nowrap ">Add site</p>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[300px]">
         <form
-          className="w-full h-full flex flex-col gap-2 select-none"
+          className="w-full h-full flex flex-col gap-2 "
           onSubmit={handleSubmit}
         >
           <DialogHeader>

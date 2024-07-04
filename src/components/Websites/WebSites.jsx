@@ -3,14 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import { Button } from "../ui/button";
 import WebSiteOptions from "./WebSiteOptions";
 import AddWebsite from "./AddWebsite";
-
-const getFromLocalStorage = () => {
-  let storedData = localStorage.getItem("website-data");
-  if (storedData) {
-    return JSON.parse(storedData);
-  }
-  return [];
-};
+import { Trash } from "lucide-react";
 
 const WebSites = ({ isEdit }) => {
   const [webSitesData, setWebSitesData] = useState(getFromLocalStorage());
@@ -18,6 +11,14 @@ const WebSites = ({ isEdit }) => {
 
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
   const isTablet = useMediaQuery({ query: "(min-width: 720px)" });
+
+  function getFromLocalStorage() {
+    let storedData = localStorage.getItem("website-data");
+    if (storedData) {
+      return JSON.parse(storedData);
+    }
+    return [];
+  }
 
   useEffect(() => {
     localStorage.setItem("website-data", JSON.stringify(webSitesData));
@@ -58,14 +59,24 @@ const WebSites = ({ isEdit }) => {
             }
           >
             {isEdit ? (
-              <WebSiteOptions
+              <div className="absolute top-0 right-0 z-50">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  // className="absolute top-0 right-0 z-50 flex justify-center items-center"
+                  onClick={() => handleDelete(website)}
+                >
+                  <Trash className="w-[0.9rem] h-[0.9rem]" />
+                </Button>
+              </div>
+            ) : (
+              /*  <WebSiteOptions
                 website={website}
                 webSitesData={webSitesData}
                 setWebSitesData={setWebSitesData}
                 idx={idx}
                 handleDelete={handleDelete}
-              />
-            ) : (
+              /> */
               ""
             )}
 
@@ -83,11 +94,11 @@ const WebSites = ({ isEdit }) => {
                   <img
                     src={website.img}
                     alt="favicon"
-                    className="w-9 rounded-lg selector"
+                    className="w-9 rounded-lg"
                   />
                 </div>
               </div>
-              <p className="pt-2 text-xs text-foreground select-none over px-2 whitespace-nowrap">
+              <p className="pt-2 text-xs text-foreground  over px-2 whitespace-nowrap">
                 {website.name.length <= 10
                   ? website.name.slice(0, 10)
                   : website.name.slice(0, 10) + "..."}

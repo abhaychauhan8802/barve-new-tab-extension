@@ -1,6 +1,6 @@
 import React from "react";
 import ModeToggle from "./ModeToggle";
-import { Pencil, Check } from "lucide-react";
+import { Pencil, Check, Trash } from "lucide-react";
 import { Button } from "../ui/button";
 import Menu from "./Menu";
 
@@ -20,7 +20,8 @@ const Header = ({ isEdit, setIsEdit }) => {
             {isEdit ? (
               <Check className="h-[1.2rem] w-[1.2rem]" />
             ) : (
-              <Pencil className="h-[1.2rem] w-[1.2rem]" />
+              <Trash className="h-[1.2rem] w-[1.2rem]" />
+              // <Pencil className="h-[1.2rem] w-[1.2rem]" />
             )}
           </Button>
           <ModeToggle />

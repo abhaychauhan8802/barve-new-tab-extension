@@ -27,7 +27,7 @@ const EditWebsite = ({ webSitesData, setWebSitesData, website, idx }) => {
         ""
       );
 
-      const updateItems = () => {
+      (updateItems = () => {
         const copy = [...webSitesData];
         copy.splice(idx, 1, {
           name: siteName,
@@ -35,9 +35,7 @@ const EditWebsite = ({ webSitesData, setWebSitesData, website, idx }) => {
           img: `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${siteUrlWithoutProtocol}/&size=64`,
         });
         setWebSitesData(copy);
-      };
-
-      updateItems();
+      })();
 
       setSiteName("");
       setSiteUrl("");
@@ -58,7 +56,7 @@ const EditWebsite = ({ webSitesData, setWebSitesData, website, idx }) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[300px]">
         <form
-          className="w-full h-full flex flex-col gap-2 select-none"
+          className="w-full h-full flex flex-col gap-2"
           onSubmit={handleSubmit}
         >
           <DialogHeader>

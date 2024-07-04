@@ -24,9 +24,8 @@ const Menu = () => {
         <ScrollArea className="w-full h-full p-2">
           <div className="grid grid-cols-3 justify-items-stretch gap-2 w-full h-full pr-3">
             {menuApps.map((app, idx) => (
-              <div>
+              <div key={idx}>
                 <Button
-                  key={idx}
                   variant="ghost"
                   onClick={() => {
                     window.location.href = app.url;
@@ -38,11 +37,11 @@ const Menu = () => {
                       <img
                         src={app.img}
                         alt="favicon"
-                        className="w-9 rounded-lg selector"
+                        className="w-9 rounded-lg"
                       />
                     </div>
                   </div>
-                  <p className="pt-2 text-xs text-foreground select-none over px-2 whitespace-nowrap">
+                  <p className="pt-2 text-xs text-foreground  over px-2 whitespace-nowrap">
                     {app.name.length <= 10
                       ? app.name.slice(0, 10)
                       : app.name.slice(0, 10) + "..."}
