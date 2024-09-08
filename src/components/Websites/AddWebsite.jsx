@@ -21,13 +21,14 @@ const AddWebsite = ({ webSitesData, setWebSitesData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (siteName && siteUrl) {
+    if (siteUrl) {
       const siteUrlWithoutProtocol = siteUrl.replace(
         /^https?:\/\/(www\.)?/,
         ""
       );
+
       const newSite = {
-        name: siteName,
+        name: siteName ? siteName : siteUrl,
         url: siteUrlWithoutProtocol,
         // img: `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${siteUrlWithoutProtocol}/&size=64`,
         img: `https://www.google.com/s2/favicons?domain=${siteUrlWithoutProtocol}&sz=64`,

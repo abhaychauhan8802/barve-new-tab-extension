@@ -80,30 +80,27 @@ const WebSites = ({ isEdit }) => {
               ""
             )}
 
-            <Button
-              variant={isEdit ? "disable" : "ghost"}
-              onClick={() => {
-                if (!isEdit) {
-                  window.location.href = `https://${website.url}`;
-                }
-              }}
-              className="overflow-hidden rounded-xl w-24 h-24 flex flex-col justify-center items-center px-2 md:px-4"
-            >
-              <div className="bg-white border-[1px] p-[2px] rounded-xl">
-                <div className="w-10 h-10 text-2xl flex justify-center items-center">
-                  <img
-                    src={website.img}
-                    alt="favicon"
-                    className="w-9 rounded-lg"
-                  />
+            <a href={!isEdit && `https://${website.url}`}>
+              <Button
+                variant={isEdit ? "disable" : "ghost"}
+                className="overflow-hidden rounded-xl w-24 h-24 flex flex-col justify-center items-center px-2 md:px-4"
+              >
+                <div className="bg-white border-[1px] p-[2px] rounded-xl">
+                  <div className="w-10 h-10 text-2xl flex justify-center items-center">
+                    <img
+                      src={website.img}
+                      alt="favicon"
+                      className="w-9 rounded-lg"
+                    />
+                  </div>
                 </div>
-              </div>
-              <p className="pt-2 text-xs text-foreground  over px-2 whitespace-nowrap">
-                {website.name.length <= 10
-                  ? website.name.slice(0, 10)
-                  : website.name.slice(0, 10) + "..."}
-              </p>
-            </Button>
+                <p className="pt-2 text-xs text-foreground  over px-2 whitespace-nowrap">
+                  {website.name.length <= 10
+                    ? website.name.slice(0, 10)
+                    : website.name.slice(0, 10) + "..."}
+                </p>
+              </Button>
+            </a>
           </div>
         ))}
 
